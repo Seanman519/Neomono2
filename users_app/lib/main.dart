@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (c) => AddressChanger())
       ],
       child: MaterialApp(
-        debugShowCheckedModeBanner: false,
+        debugShowCheckedModeBanner: true,
         title: 'Users App',
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
