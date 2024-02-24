@@ -5,40 +5,39 @@ class Menus {
   String? sellerUID;
   String? menuTitle;
   String? menuInfo;
-  Timestamp? publishedDate;
+  Timestamp? publishDate;
   String? thumbnailUrl;
   String? status;
 
   Menus({
     this.menuID,
-    this.sellerUID,
-    this.menuTitle,
     this.menuInfo,
-    this.publishedDate,
-    this.thumbnailUrl,
+    this.menuTitle,
+    this.publishDate,
+    this.sellerUID,
     this.status,
+    this.thumbnailUrl,
   });
 
   Menus.fromJson(Map<String, dynamic> json) {
-    menuID = json["menusID"];
-    sellerUID = json["sellerUID"];
-    menuTitle = json["menuTitle"];
+    menuID = json["menuID"];
     menuInfo = json["menuInfo"];
-    publishedDate = json["publishedDate"];
-    thumbnailUrl = json["thumbnailUrl"];
+    menuTitle = json["menuTitle"];
+    publishDate = json["publishDate"];
+    sellerUID = json["sellerUID"];
     status = json["status"];
+    thumbnailUrl = json["thumbnailUrl"];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    data["menusID"] = menuID;
-    data["sellerUID"] = sellerUID;
-    data["menutitle"] = menuTitle;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data["menuID"] = menuID;
     data["menuInfo"] = menuInfo;
-    data["publishedDate"] = publishedDate;
-    data["thumbnailUrl"] = thumbnailUrl;
+    data["menuTitle"] = menuTitle;
+    data["publishDate"] = publishDate;
+    data["sellerUID"] = sellerUID;
     data["status"] = status;
-
+    data["thumbnailUrl"] = thumbnailUrl;
     return data;
   }
 }

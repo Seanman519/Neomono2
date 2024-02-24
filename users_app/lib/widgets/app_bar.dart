@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:users_app/assistant%20methods/cart_item_counter.dart';
-import 'package:users_app/main%20screens/cart_screen.dart';
+import 'package:users_food_app/assistantMethods/cart_item_counter.dart';
+import 'package:users_food_app/screens/cart_screen.dart';
 
-class MyAppBar extends StatefulWidget implements PreferredSizeWidget {
-  final String? sellerUID;
+class MyAppBar extends StatefulWidget with PreferredSizeWidget {
   final PreferredSizeWidget? bottom;
-  const MyAppBar({super.key, this.bottom, this.sellerUID});
+  final String? sellerUID;
+  MyAppBar({Key? key, this.bottom, this.sellerUID}) : super(key: key);
 
   @override
-  State<MyAppBar> createState() => _MyAppBarState();
+  _MyAppBarState createState() => _MyAppBarState();
 
   @override
   Size get preferredSize => bottom == null
@@ -21,50 +22,75 @@ class _MyAppBarState extends State<MyAppBar> {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: const Text(
-        "IFood",
-        style: TextStyle(fontFamily: "Gilroy"),
+      flexibleSpace: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: FractionalOffset(-2.0, 0.0),
+            end: FractionalOffset(5.0, -1.0),
+            colors: [
+              Color(0xFFFFFFFF),
+              Color(0xFFFAC898),
+            ],
+          ),
+        ),
       ),
-      centerTitle: true,
-      automaticallyImplyLeading: true,
       actions: [
         Stack(
           children: [
             IconButton(
               onPressed: () {
-                //send user to cart screen
                 Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (c) =>
-                            CartScreen(sellerUID: widget.sellerUID)));
+                  context,
+                  MaterialPageRoute(
+                    builder: (c) => CartScreen(sellerUID: widget.sellerUID),
+                  ),
+                );
               },
-              icon: const Icon(Icons.shopping_cart),
-              color: Colors.cyan,
-            ),
-            Container(
-              height: 20,
-              //width: 20,
-              padding: const EdgeInsets.only(right: 5, left: 5),
-              decoration: BoxDecoration(
-                  color: const Color(0xff94b723),
-                  borderRadius: BorderRadius.circular(20)),
-              child: Center(
-                child:
-                    Consumer<CartItemCounter>(builder: (context, counter, c) {
-                  return Text(
-                    counter.count.toString(),
-                    style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 12,
-                        fontFamily: "Gilroy"),
-                  );
-                }),
+              icon: const Icon(
+                Icons.shopping_cart,
+                color: Colors.orange,
               ),
-            )
+            ),
+            Positioned(
+              child: Stack(
+                children: [
+                  const Icon(
+                    Icons.brightness_1,
+                    size: 20,
+                    color: Colors.green,
+                  ),
+                  Positioned(
+                    top: 3,
+                    right: 4,
+                    child: Center(
+                      child: Consumer<CartItemCounter>(
+                          builder: (context, counter, c) {
+                        return Text(
+                          counter.count.toString(),
+                          style: GoogleFonts.lato(
+                            textStyle: const TextStyle(
+                                fontSize: 13,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black),
+                          ),
+                        );
+                      }),
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ],
-        ),
+        )
       ],
+      leading: IconButton(
+        icon: const Icon(Icons.arrow_back_ios_new_rounded),
+        onPressed: () {
+          Navigator.pop(context);
+        },
+      ),
+      automaticallyImplyLeading: true,
+      elevation: 0,
     );
   }
 }

@@ -5,40 +5,68 @@ class CustomTextField extends StatelessWidget {
   final TextEditingController? controller;
   final IconData? data;
   final String? hintText;
-  bool? is0bsecre = true;
+  bool? isObsecre = true;
   bool? enabled = true;
 
   CustomTextField({
+    Key? key,
     this.controller,
     this.data,
-    this.hintText,
-    this.is0bsecre,
     this.enabled,
-  });
+    this.hintText,
+    this.isObsecre,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-        color: const Color(0xfff5f6fa),
-        borderRadius: BorderRadius.circular(10),
-      ),
-      padding: const EdgeInsets.all(8.0),
+      width: MediaQuery.of(context).size.width / 1.3,
+      padding: const EdgeInsets.only(top: 10),
       margin: const EdgeInsets.all(10),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(30),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.4),
+            blurRadius: 5,
+            offset: const Offset(0, 5),
+          )
+        ],
+      ),
       child: TextFormField(
         enabled: enabled,
         controller: controller,
-        obscureText: is0bsecre!,
+        obscureText: isObsecre!,
         cursorColor: Theme.of(context).primaryColor,
         decoration: InputDecoration(
-          fillColor: Colors.grey,
-          border: InputBorder.none,
-          prefixIcon: Icon(
-            data,
-            color: const Color(0xff231f20),
-          ),
-          focusColor: Theme.of(context).primaryColor,
           hintText: hintText,
+          labelText: hintText,
+          fillColor: Colors.white70,
+          filled: true,
+          contentPadding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(30.0),
+            borderSide: const BorderSide(
+              color: Colors.grey,
+            ),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(30.0),
+            borderSide: BorderSide(
+              color: Colors.grey.shade400,
+            ),
+          ),
+          errorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(30.0),
+            borderSide: const BorderSide(
+              color: Colors.red,
+              width: 2.0,
+            ),
+          ),
+          focusedErrorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(30.0),
+            borderSide: const BorderSide(color: Colors.red, width: 2.0),
+          ),
         ),
       ),
     );

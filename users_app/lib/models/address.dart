@@ -20,18 +20,18 @@ class Address {
   });
 
   Address.fromJson(Map<String, dynamic> json) {
-    name = json["name"];
-    phoneNumber = json["phoneNumber"];
-    flatNumber = json["flatNumber"];
-    city = json["city"];
-    state = json["state"];
-    fullAddress = json["fullAddress"];
-    lat = json["lat"];
-    lng = json["lng"];
+    name = json['name'];
+    phoneNumber = json['phoneNumber'];
+    flatNumber = json['flatNumber'];
+    city = json['city'];
+    state = json['state'];
+    fullAddress = json['fullAddress'];
+    lat = json['lat'];
+    lng = json['lng'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['name'] = name;
     data['phoneNumber'] = phoneNumber;
     data['flatNumber'] = flatNumber;
